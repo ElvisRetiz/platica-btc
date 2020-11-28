@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Baltic</title>
+</head>
+<body style="margin: 0;">
+  <div class="game">
+    <div class="roulette">
+      <img src="./assets/ruleta.png" alt="ruleta" id="ruleta">
+    </div>
+    <div class="input">
+      <img src="./assets/selector.png" alt="selector" id="selector">
+    </div>
+    <div class="output">
+      <div id="led">
+        0
+      </div>
+    </div>
+    <div class="container">
+      <button id="left"><img src="./assets/left.png" alt="btn"></button>
+      <button id="right"><img src="./assets/right.png" alt="btn"></button>
+    </div>
+    <div class="file" id="expediente">
+      <img src="./assets/file.png" alt="file" id="mensaje">
+    </div>
+  </div>
+  <script>
+    let actualDegrees = 0;
+    let actualPosition = 0;
+
+    const ruleta = document.getElementById("ruleta");
+    const btnLeft = document.getElementById("left");
+    const btnRight = document.getElementById("right");
+    const led = document.getElementById('led');
+    const mensaje = document.getElementById('mensaje');
+    const expediente = document.getElementById('expediente');
+
+    function toggleExpedient() {
+      expediente.classList.toggle('upside');
+    }
+
+    function TurnLeft() {
+      actualDegrees += 60;
+      ruleta.style.transform = `rotate(${actualDegrees}deg)`;
+      actualPosition++
+      if (actualPosition > 6 ) {
+        actualPosition -= 6
+      }
+      console.log(actualPosition)
+      verifyValue(actualPosition)
+    }
+
+    function TurnRight() {
+      actualDegrees -= 60;
+      ruleta.style.transform = `rotate(${actualDegrees}deg)`;
+      actualPosition--
+      if (actualPosition < -6 ) {
+        actualPosition += 6
+      }
+      console.log(actualPosition)
+      verifyValue(actualPosition)
+    }
+
+    function verifyValue(value) {
+      switch (Math.abs(value)) {
+        case 0:
+          console.log('0')
+          led.innerHTML = '0'
+          break;
+        case 6:
+          console.log('0')
+          led.innerHTML = '0'
+          break;
+        case 1:
+          console.log('1')
+          led.innerHTML = '1'
+          break;
+        case 2:
+          console.log('0')
+          led.innerHTML = '0'
+          break;
+        case 3:
+          console.log('1')
+          led.innerHTML = '1'
+          break;
+        case 4:
+          console.log('0')
+          led.innerHTML = '0'
+          break;
+        case 5:
+          console.log('1')
+          led.innerHTML = '1'
+          break;
+      }
+    }
+
+    btnLeft.addEventListener('click',TurnLeft);
+    btnRight.addEventListener('click',TurnRight);
+    mensaje.addEventListener('click',toggleExpedient);
+  </script>
+</body>
+</html>
